@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "http": "^0.0.0",
+    "http": "0.0.0",
     "os": "^0.1.1",
     "typescript": "^3.1.1"
   },

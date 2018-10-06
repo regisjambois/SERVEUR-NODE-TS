@@ -1,2 +1,4 @@
-ts-node ./src/start.ts
+tsc
+node dist/out-tsc/start.js
+
 

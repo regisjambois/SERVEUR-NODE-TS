@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as session from 'express-session';
 
 /**
  * SERVEUR SPARTA *
@@ -6,6 +7,8 @@ import * as express from 'express';
 export class Serveur {
 
     private nodePort: number;
+
+    private app: express.Application = express();
 
     constructor(port: number) {
         console.log('*');
@@ -35,16 +38,19 @@ export class Serveur {
 
     public runExpressSrv() : void {
 
-        const app: express.Application = express();
+        
 
-        app.get('/', function (req, res) {
-            
-            res.send('** SERVEUR SPARTA **');
+        this.app.get('/', function (req, res) {
+            console.log("URL : "+req.originalUrl);
+            console.log("Path : "+req.path);
+            console.log("SessionID : "+req.sessionID);
+            res.json({ srv: '** SERVEUR SPARTA **' });
+            // res.send('** SERVEUR SPARTA **');
           })
 
 
 
-        app.listen(this.nodePort, () => {
+        this.app.listen(this.nodePort, () => {
 
             this.displayServeurName();
             // Success callback

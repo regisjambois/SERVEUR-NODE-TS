@@ -2,21 +2,33 @@ import * as express from 'express';
 import * as session from 'express-session';
 
 /**
- * SERVEUR SPARTA *
+ * SERVEUR SPARTA
  */
 export class Serveur {
 
+    /**
+     * Port TCP d'écoute
+     */
     private nodePort: number;
 
+    /**
+     * Instance EXPRESSJS
+     */
     private app: express.Application = express();
 
+    /**
+     * Serveur SPARTA
+     * @param port Port TCP
+     */
     constructor(port: number) {
         console.log('*');
         this.nodePort = port;
         // this.app = express();
     }
 
-
+    /**
+     * Affichage du nom du serveur
+     */
     private displayServeurName() : void {
         // http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Serveur%20SPARTA
         console.log('  ███████╗███████╗██████╗ ██╗   ██╗███████╗██╗   ██╗██████╗  ');
@@ -36,6 +48,9 @@ export class Serveur {
         console.log('');
     }
 
+    /**
+     * Initialisation du système de gestion des sessions
+     */
     private initSession() : void {
         console.log('Appel de initSession');
 
@@ -54,6 +69,9 @@ export class Serveur {
       
     }
 
+    /**
+     * Lancement du serveur web
+     */
     public runExpressSrv() : void {
 
         this.displayServeurName();
@@ -72,9 +90,7 @@ export class Serveur {
 
 
 
-        this.app.listen(this.nodePort, () => {
-
-           
+        this.app.listen(this.nodePort, () => {           
             // Success callback
             console.log("Le serveur écoute sur le port : "+this.nodePort);
         });

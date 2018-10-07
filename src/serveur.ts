@@ -36,23 +36,45 @@ export class Serveur {
         console.log('');
     }
 
+    private initSession() : void {
+        console.log('Appel de initSession');
+
+        //var hour = 3600000;
+        //req.session.cookie.expires = new Date(Date.now() + hour);
+        //req.session.cookie.maxAge = hour;
+
+
+        this.app.use(session({
+            secret: 'SPARTA2019',
+            resave: true,
+            saveUninitialized: false,
+            cookie: { secure: true, maxAge:60000 }
+          }))
+        
+      
+    }
+
     public runExpressSrv() : void {
 
-        
+        this.displayServeurName();
+
+        this.initSession();
 
         this.app.get('/', function (req, res) {
             console.log("URL : "+req.originalUrl);
             console.log("Path : "+req.path);
-            console.log("SessionID : "+req.sessionID);
+            console.log("SessionID : "+req.session.id);
+            console.log(req.session.cookie.maxAge);
+            
             res.json({ srv: '** SERVEUR SPARTA **' });
-            // res.send('** SERVEUR SPARTA **');
+            res.end;
           })
 
 
 
         this.app.listen(this.nodePort, () => {
 
-            this.displayServeurName();
+           
             // Success callback
             console.log("Le serveur écoute sur le port : "+this.nodePort);
         });
